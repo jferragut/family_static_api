@@ -13,7 +13,29 @@ class FamilyStructure:
         self.last_name = last_name
 
         # example list of members
-        self._members = []
+        self._members = [
+            {
+                "id": self._generateId(),
+                "first_name": "John",
+                "last_name": last_name,
+                "age": 33,
+                "lucky_numbers": [7,13,22]
+            },
+            {
+                "id": self._generateId(),
+                "first_name": "Jane",
+                "last_name": last_name,
+                "age": 35,
+                "lucky_numbers": [10,14,3]
+            },
+            {
+                "id": self._generateId(),
+                "first_name": "Jimmy",
+                "last_name": last_name,
+                "age": 5,
+                "lucky_numbers": [1]
+            }
+        ]
 
     # read-only: Use this method to generate random members ID's when adding members into the list
     def _generateId(self):
@@ -21,15 +43,50 @@ class FamilyStructure:
 
     def add_member(self, member):
         # fill this method and update the return
-        pass
+        if member["id"] is None:
+            member["id"] = self._generateId()
+
+        member["last_name"] = self.last_name
+        self._members.append(member)
+        return self._members
 
     def delete_member(self, id):
         # fill this method and update the return
-        pass
+        status = ""
+        try:
+            for i,x in enumerate(self._members):
+                if x["id"] == id:
+                    self._members.pop(i)
+                    status = {
+                        "status": "Successfully deleted member."
+                    }
+                    break
+                else:
+                    status = False
+                
+        except:
+            status = False
+
+        return status
 
     def get_member(self, id):
         # fill this method and update the return
-        pass
+        member = {}
+        try:
+            for x in self._members:
+                if x["id"] == id:
+                    member = x
+                else:
+                    member = False
+        except:
+            member = False
+
+        return {
+            "id": self.id,
+            "first_name": self.first_name,
+            "age": self.age,
+            "lucky_numbers": self.lucky_numbers
+        }
 
     # this method is done, it returns a list with all the family members
     def get_all_members(self):

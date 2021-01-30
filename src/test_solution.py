@@ -97,12 +97,6 @@ def test_delete_member(client):
 
 @pytest.mark.it("Method DELETE /member/3443 should return dictionary with 'done' key")
 def test_delete_response(client):
-    client.post('/member', json={
-		"first_name": "Tommy",
-        "id": 3443,
-		"age": 23,
-		"lucky_numbers": [34,65,23,4,6]
-	})
     response = client.delete('/member/3443')
     assert response.json["done"] == True
 
