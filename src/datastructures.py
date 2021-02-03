@@ -52,7 +52,6 @@ class FamilyStructure:
     def delete_member(self, id):
         status = False
         for index, item in enumerate(self._members, start=0):
-        # for index,item in enumerate(self._members):
             if item["id"] == id:
                 self._members.pop(index)
                 status = True
