@@ -42,8 +42,7 @@ class FamilyStructure:
         return randint(0, 99999999)
 
     def add_member(self, member):
-        # fill this method and update the return
-        if member["id"] is None:
+        if "id" not in member:
             member["id"] = self._generateId()
 
         member["last_name"] = self.last_name
@@ -51,42 +50,25 @@ class FamilyStructure:
         return self._members
 
     def delete_member(self, id):
-        # fill this method and update the return
-        status = ""
-        try:
-            for i,x in enumerate(self._members):
-                if x["id"] == id:
-                    self._members.pop(i)
-                    status = {
-                        "status": "Successfully deleted member."
-                    }
-                    break
-                else:
-                    status = False
-                
-        except:
-            status = False
+        status = False
+        for index, item in enumerate(self._members, start=0):
+        # for index,item in enumerate(self._members):
+            if item["id"] == id:
+                self._members.pop(index)
+                status = True
 
         return status
 
     def get_member(self, id):
-        # fill this method and update the return
         member = {}
-        try:
-            for x in self._members:
-                if x["id"] == id:
-                    member = x
-                else:
-                    member = False
-        except:
-            member = False
+        for x in self._members:
+            if x['id'] == id:
+                member = x
+                break
+            else:
+                member = False
 
-        return {
-            "id": self.id,
-            "first_name": self.first_name,
-            "age": self.age,
-            "lucky_numbers": self.lucky_numbers
-        }
+        return member
 
     # this method is done, it returns a list with all the family members
     def get_all_members(self):

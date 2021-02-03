@@ -45,7 +45,7 @@ def handle_get_specific_member(member_id):
     status = 200
     try: 
         member = jackson_family.get_member(member_id)
-        if member is False:
+        if member == False:
             response_body = {
                 "status": "Could not find member"
             }
@@ -65,7 +65,7 @@ def handle_get_specific_member(member_id):
 def handle_add_member():
     status = 200
     body = request.json
-    print(body)
+    
     if body is None:
         response_body = {
             "status": "Body was missing in your request"
@@ -89,7 +89,7 @@ def handle_delete_member(member_id):
     status = 200
     try: 
         member = jackson_family.delete_member(member_id)
-        if member is False:
+        if member == False:
             response_body = {
                 "status": "Member not found."
             }
@@ -97,8 +97,8 @@ def handle_delete_member(member_id):
         else:
             response_body = {
                 "done": True
-            }    
-
+            }   
+        print(member)
     except:
         response_body = {
             "status": "There was a problem on the server. Could not fulfill request."
